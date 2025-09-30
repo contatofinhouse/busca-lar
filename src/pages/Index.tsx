@@ -4,7 +4,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { PropertyGrid } from "@/components/PropertyGrid";
 import { Button } from "@/components/ui/button";
 import { mockProperties } from "@/lib/mockData";
-import { Building2, LogIn, LogOut } from "lucide-react";
+import { Building2, LogIn, LogOut, Shield, CheckCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 const Index = () => {
@@ -51,13 +51,31 @@ const Index = () => {
               </Link>
             )}
           </div>
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
+              <Shield className="h-5 w-5" />
+              <span className="font-semibold">Plataforma Exclusiva para Imobiliárias Verificadas</span>
+            </div>
             <h1 className="text-5xl font-bold mb-4">
-              Encontre o imóvel ideal
+              Encontre o imóvel ideal com mais segurança
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground mb-6">
               Busque por CEP ou endereço e descubra as melhores opções
             </p>
+            <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-primary" />
+                <span>Imobiliárias Aprovadas</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-primary" />
+                <span>Anúncios Verificados</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-primary" />
+                <span>Contato Direto</span>
+              </div>
+            </div>
           </div>
           <SearchBar onSearch={handleSearch} />
         </div>
