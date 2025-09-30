@@ -1,8 +1,9 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Bed, Bath, Car, Square, Phone, Mail } from "lucide-react";
+import { ArrowLeft, MapPin, Bed, Bath, Car, Square, Phone, Mail, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { mockProperties } from "@/lib/mockData";
 
 const PropertyDetails = () => {
@@ -32,12 +33,51 @@ const PropertyDetails = () => {
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
-              <img
-                src={property.image}
-                alt={property.title}
-                className="w-full h-full object-cover"
-              />
+            {/* Slideshow de Fotos */}
+            <div className="space-y-4">
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {/* Foto principal */}
+                  <CarouselItem>
+                    <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
+                      <img
+                        src={property.image}
+                        alt={property.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </CarouselItem>
+                  {/* Fotos adicionais (placeholder) */}
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <CarouselItem key={index}>
+                      <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
+                        <img
+                          src={property.image}
+                          alt={`${property.title} - Foto ${index + 2}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-4" />
+                <CarouselNext className="right-4" />
+              </Carousel>
+            </div>
+
+            {/* Tour 360 */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold">Tour Virtual 360°</h2>
+              <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-muted flex items-center justify-center">
+                <div className="text-center">
+                  <div className="bg-primary/10 p-4 rounded-full mb-4 inline-block">
+                    <Play className="h-8 w-8 text-primary" />
+                  </div>
+                  <p className="text-muted-foreground">
+                    Tour 360° disponível em breve
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div>
