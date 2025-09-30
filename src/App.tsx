@@ -3,10 +3,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./hooks/useAuth";
 import Index from "./pages/Index";
 import PropertyDetails from "./pages/PropertyDetails";
 import RegisterRealEstate from "./pages/RegisterRealEstate";
 import RegisterProperty from "./pages/RegisterProperty";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -17,14 +19,17 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/imovel/:id" element={<PropertyDetails />} />
-          <Route path="/cadastro-imobiliaria" element={<RegisterRealEstate />} />
-          <Route path="/cadastro-imovel" element={<RegisterProperty />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/imovel/:id" element={<PropertyDetails />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/cadastro-imobiliaria" element={<RegisterRealEstate />} />
+            <Route path="/cadastro-imovel" element={<RegisterProperty />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
